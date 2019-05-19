@@ -12,16 +12,13 @@ SynthDef.new(\volumeSynth, {
     arg in, out = 0;
     var sig, amp, pitch;
     sig = In.ar(in, 2);
-    amp = Amplitude.kr(sig, 0.1, 8);
+    amp = Amplitude.ar(sig, 0.1, 1);
 //     pitch = Pitch.kr(sig);
-    SendReply.kr(Impulse.kr(30), '/amplitudeListener', amp, 1);
+    SendReply.kr(Impulse.kr(45), '/amplitudeListener', amp, 1);
     // sig = FreeVerb.ar(sig, 0.5, 0.8, 0.001);
 //     sig = sig * 0.9;
 //     Out.ar(out, sig);
 }).add;
-)
-
-(
 ~volSynth.free;
 ~volSynth = Synth.new(\volumeSynth, [\in, ~volumeBus, \out, 0], ~fxGroup);
 )
